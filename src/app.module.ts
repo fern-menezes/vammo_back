@@ -1,5 +1,7 @@
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Viagem } from './viagem/entities/viagem.entity';
+import { ViagemModule } from './viagem/viagem.module';
+import { Module } from '@nestjs/common';
 
 
 @Module({
@@ -11,9 +13,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'root',
       database:'db_vammo_app',
-      entities: [],
+      entities: [Viagem],
       synchronize: true,
-    })
+      logging: true,
+    }),
+    ViagemModule,
   ],
   controllers: [],
   providers: [],
