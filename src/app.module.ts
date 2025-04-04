@@ -2,6 +2,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Viagem } from './viagem/entities/viagem.entity';
 import { ViagemModule } from './viagem/viagem.module';
 import { Module } from '@nestjs/common';
+import { Veiculo } from './veiculo/entities/veiculo.entity';
+import { VeiculoModule } from './veiculo/veiculo.module';
 
 
 @Module({
@@ -13,11 +15,12 @@ import { Module } from '@nestjs/common';
       username: 'root',
       password: 'root',
       database:'db_vammo_app',
-      entities: [Viagem],
+      entities: [Viagem, Veiculo],
       synchronize: true,
       logging: true,
     }),
     ViagemModule,
+    VeiculoModule,
   ],
   controllers: [],
   providers: [],

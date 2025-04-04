@@ -2,6 +2,7 @@
 import { IsNotEmpty, IsNumber, IsPositive } from "class-validator"
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { NumericTransformer } from "src/util/numericTransformer"
+import { Veiculo } from "src/veiculo/entities/veiculo.entity";
 
 
 @Entity({name: "tb_viagens"})
@@ -52,13 +53,14 @@ export class Viagem {
     //@ApiProperty() 
     status: string
 
-    /**  Relacionamentos 
-    @ApiProperty({ type: () => Veiculo })  
+     Relacionamentos 
+    //@ApiProperty({ type: () => Veiculo })  
     @ManyToOne(() => Veiculo, (veiculo) => veiculo.viagem, {
         onDelete: "CASCADE"
     })
     veiculo: Veiculo
 
+    /** 
     @ApiProperty({ type: () => Usuario })  
     @ManyToOne(() => Usuario, (usuario) => usuario.viagem, {
             onDelete: "CASCADE"
