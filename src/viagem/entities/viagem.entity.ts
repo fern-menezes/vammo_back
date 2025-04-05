@@ -1,8 +1,9 @@
-//import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from "@nestjs/swagger"
 import { IsNotEmpty, IsNumber, IsPositive } from "class-validator"
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { NumericTransformer } from "src/util/numericTransformer"
 import { Veiculo } from "src/veiculo/entities/veiculo.entity";
+import { Usuario } from "src/usuario/entities/usuario.entiry";
 
 
 @Entity({name: "tb_viagens"})
@@ -10,61 +11,60 @@ import { Veiculo } from "src/veiculo/entities/veiculo.entity";
 export class Viagem {
 
     @PrimaryGeneratedColumn() 
-    //@ApiProperty() 
+    @ApiProperty() 
     id: number
 
-    //@ApiProperty()  
+    @ApiProperty()  
     @CreateDateColumn()
     data_ida: Date;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false}) 
-    //@ApiProperty() 
+    @ApiProperty() 
     origem: string
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false}) 
-    //@ApiProperty() 
+    @ApiProperty() 
     destino: string
 
     @IsNotEmpty()
-    //@ApiProperty() 
+    @ApiProperty() 
     @Column({ type: 'int' })  
     distancia: number;
 
     @IsNotEmpty()
-    //@ApiProperty() 
+    @ApiProperty() 
     @Column({ type: 'int' })  
     velocidade: number;
 
     @IsNumber({ maxDecimalPlaces: 2 })
     @IsNotEmpty()
     @IsPositive()
-    //@ApiProperty() 
+    @ApiProperty() 
     @Column({ type: "decimal", precision: 10, scale: 2, transformer: new NumericTransformer() })
     preco: number
     
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 10, nullable: true})
     duracao: string;
 
     @IsNotEmpty()
     @Column({length: 255, nullable: false }) 
-    //@ApiProperty() 
+    @ApiProperty() 
     status: string
 
      Relacionamentos 
-    //@ApiProperty({ type: () => Veiculo })  
+    @ApiProperty({ type: () => Veiculo })  
     @ManyToOne(() => Veiculo, (veiculo) => veiculo.viagem, {
         onDelete: "CASCADE"
     })
     veiculo: Veiculo
 
-    /** 
+    
     @ApiProperty({ type: () => Usuario })  
     @ManyToOne(() => Usuario, (usuario) => usuario.viagem, {
             onDelete: "CASCADE"
         })
         usuario: Usuario
-*/
 }

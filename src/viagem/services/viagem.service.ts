@@ -2,22 +2,24 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, ILike, Repository } from 'typeorm';
 import { Viagem } from '../entities/viagem.entity';
+import { VeiculoService } from 'src/veiculo/services/veiculo.service';
 
 
 
 @Injectable()
 export class ViagemService {
+  
   constructor(
     @InjectRepository(Viagem)
     private viagemRepository: Repository<Viagem>,
-    //private veiculoService: VeiculoService,
+    private veiculoService: VeiculoService,
   ) {}
 
   async findAll(): Promise<Viagem[]> {
     return await this.viagemRepository.find({
       relations: {
-        //veiculo: true,
-        //usuario: true,
+        veiculo: true,
+        usuario: true,
       },
     });
   }
@@ -28,8 +30,8 @@ export class ViagemService {
         id,
       },
       relations: {
-        //veiculo: true,
-        //usuario: true,
+        veiculo: true,
+        usuario: true,
       },
     });
 
@@ -48,8 +50,8 @@ export class ViagemService {
         origem: ILike(`%${origem}%`),
       },
       relations: {
-        //veiculo: true,
-        //usuario: true,
+        veiculo: true,
+        usuario: true,
       },
     });
   }
@@ -61,14 +63,13 @@ export class ViagemService {
     //Formata Hora
     viagem.duracao = this.formatarDuracaoEmTempo(tempoViagem);
     
-    //await this.veiculoService.findById(viagem.veiculo.id);
-
+    await this.veiculoService.findById(viagem.veiculo.id);
     return await this.viagemRepository.save(viagem);
   }
 
   async update(viagem: Viagem): Promise<Viagem> {
     await this.findById(viagem.id);
-    //await this.veiculoService.findById(viagem.veiculo.id);
+    await this.veiculoService.findById(viagem.veiculo.id);
 
     return await this.viagemRepository.save(viagem);
   }

@@ -1,57 +1,57 @@
 /* eslint-disable prettier/prettier */
-
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsBoolean, IsNotEmpty } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Viagem } from "../../viagem/entities/viagem.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({name: "tb_veiculo"})
 export class Veiculo{
 
     @PrimaryGeneratedColumn()
-    //@ApiProperty()
+    @ApiProperty()
     id: number;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 100, nullable: false})
     modelo: string;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 7, nullable: false})
     placa: string;
 
     @IsNotEmpty()
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 30, nullable: false})
     cor: string;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 10, nullable: false})
     ano_fabricacao: string;
 
     @Column({length:5000, nullable: true})
-    //@ApiProperty()
+    @ApiProperty()
     foto:string
 
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
-    //@ApiProperty()
+    @ApiProperty()
     @Column({length: 5000, nullable: false})
     observacao: string;
 
     @Transform(({ value }: TransformFnParams) => value?.trim())
     @IsNotEmpty()
-    //@ApiProperty()
+    @ApiProperty()
     disponivel: string 
 
     // Relacionamentos 
-    //@ApiProperty()
+    @ApiProperty()
     @OneToMany(() => Viagem, (viagem) => viagem.veiculo)
     viagem: Viagem[]
 }

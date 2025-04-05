@@ -1,28 +1,27 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Viagem } from './viagem/entities/viagem.entity';
 import { ViagemModule } from './viagem/viagem.module';
 import { Module } from '@nestjs/common';
-import { Veiculo } from './veiculo/entities/veiculo.entity';
 import { VeiculoModule } from './veiculo/veiculo.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { AppController } from './app.controller';
+import { ConfigModule } from '@nestjs/config';
+import { ProdService } from './auth/data/services/prod.service';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database:'db_vammo_app',
-      entities: [Viagem, Veiculo],
-      synchronize: true,
-      logging: true,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+	  useClass: ProdService,
+    imports: [ConfigModule],
     }),
     ViagemModule,
     VeiculoModule,
+    AuthModule,
+    UsuarioModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
