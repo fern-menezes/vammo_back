@@ -1,98 +1,202 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<div align="center">
+    <img src="src/assets/logo.png" title="Logo Vammo" width="50%"/>
+</div>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Vammo ↩🚘
+## Backend para Aplicativo de Carona Compartilhada
 
-## Description
+## 1. Descrição
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+O projeto **Vammo** é o desenvolvimento de um backend robusto e escalável para um aplicativo de carona compartilhada. Utilizando TypeScript e o framework NestJS, o sistema visa proporcionar uma experiência eficiente e segura para a administração do catálogo de viagens, usuários e veículos, com foco em facilidade de uso e controle de informações.
 
-## Project setup
+---
 
-```bash
-$ npm install
+## 2. Funcionalidades do Projeto
+
+### 2.1 Gerenciamento de Viagens
+
+- Permite adicionar novas viagens ao sistema com as seguintes informações:
+  - ID
+  - Origem
+  - Destino
+  - Data e hora da ida
+  - Preço da viagem
+  - Distância entre origem e destino
+  - Status da viagem
+  - Veículo
+  - Usuário
+
+- **Consulta de Viagem:**
+  - Listagem de todas as viagens.
+  - Busca por ID.
+  - Visualização de cálculo do tempo da viagem com base na distância e na velocidade média do veículo.
+
+- **Atualização de Viagem:**
+  - Altera a origem, destino, data da ida, preço, distância, status e nota de uma viagem existente e veículo.
+
+### 2.2 Gerenciamento de Veículos
+
+- Permite adicionar novos veículos ao sistema com as seguintes informações:
+  - ID
+  - Modelo
+  - Placa
+  - Ano de fabricação
+  - Observação
+  - Disponibilidade
+
+- **Consulta de Veículos:**
+  - Busca avançada por modelo, placa, ano de fabricação, observação e disponibilidade.
+  - Visualização detalhada do perfil de um veículo.
+
+- **Atualização de Dados:**
+  - Alterar modelo, placa, ano de fabricação, observação e disponibilidade.
+
+### 2.3 Gerenciamento de Usuários
+
+- Permite adicionar novos usuários ao sistema com as seguintes informações:
+  - ID
+  - Tipo de usuário
+  - Nome
+  - Data de aniversário
+  - Gênero
+  - Usuário
+  - Senha
+  - Foto
+  - Avaliação do motorista
+
+- **Consulta de Usuários:**
+  - Busca avançada por nome, gênero e usuário.
+  - Visualização detalhada do perfil de um usuário.
+
+- **Atualização de Dados:**
+  - Alterar informações cadastrais, como nome, usuário ou foto.
+
+---
+
+## 3. Sobre esta API
+
+O **NestJS** é uma estrutura para a construção de aplicativos Node.js do lado do servidor eficientes e escalonáveis. Ele usa JavaScript progressivo, é construído com TypeScript (mas também suporta JavaScript puro) e combina elementos de OOP (Programação Orientada a Objetos), FP (Programação Funcional) e FRP (Programação Funcional Reativa).
+
+Nos bastidores, o Nest utiliza estruturas robustas de servidor HTTP como o **Express** (padrão) e, opcionalmente, **Fastify**.
+
+### 3.1 Principais Funcionalidades
+
+- Estrutura modular
+- Suporte a TypeScript
+- Injeção de dependências
+- Testes facilitados
+- Controllers e rotas
+- Validação e serialização
+- Integração com bibliotecas externas
+
+---
+
+## 4. Diagrama de Classes
+
+```mermaid
+---
+config:
+  theme: dark
+  layout: dagre
+---
+
+classDiagram
+    class Usuario {
+        id: number
+        tipo_user: string
+        nome: string
+        data_aniversario: string
+        genero: string
+        usuario: string
+        senha: string
+        foto: string
+        avaliacao: number
+        viagem: Viagem[]
+    }
+
+    class Veiculo {
+        id: number
+        modelo: string
+        placa: string
+        ano_fabricacao: string
+        observacao: string
+        disponivel: boolean
+        viagem: Viagem[]
+    }
+
+    class Viagem {
+        id: number
+        data_ida: Date
+        origem: string
+        destino: string
+        distancia: number
+        velocidade: number
+        preco: number
+        duracao: string
+        status: string
+        veiculo: Veiculo
+        usuario: Usuario
+    }
+
+    Usuario --> Viagem : 1 --> N
+    Veiculo --> Viagem : 1 --> N
+    Viagem --> Usuario : N --> 1
+    Viagem --> Veiculo : N --> 1
 ```
 
-## Compile and run the project
+---
 
-```bash
-# development
-$ npm run start
+## 5. Diagrama Entidade-Relacionamento (DER)
 
-# watch mode
-$ npm run start:dev
+<div align="center">
+    <img src="https://ik.imagekit.io/n0nz1jfh6/Vammo/DER.png?updatedAt=1738338317078" title="DER">
+</div>
 
-# production mode
-$ npm run start:prod
-```
+---
 
-## Run tests
+## 6. Tecnologias Utilizadas
 
-```bash
-# unit tests
-$ npm run test
+| Item                          | Descrição  |
+| ----------------------------- | ---------- |
+| **Servidor**                  | Node.js    |
+| **Linguagem de Programação**  | TypeScript |
+| **Framework**                 | NestJS     |
+| **ORM**                       | TypeORM    |
+| **Banco de Dados Relacional** | MySQL      |
+| **Deploy**                    | Swagger, Render |
 
-# e2e tests
-$ npm run test:e2e
+---
 
-# test coverage
-$ npm run test:cov
-```
+## 7. Configuração e Execução
 
-## Deployment
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/projetointegrador-g3/vammo.git
+   ```
+2. Acesse o diretório do projeto:
+   ```sh
+   cd vammo
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
+4. Configure o banco de dados no arquivo `app.module.ts`.
+5. Execute a aplicação:
+   ```sh
+   npm run start:dev
+   ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+---
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 8. Colaboradores
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+- `@ZarathosFreya`
+- `@Beatriz-Rodrigues-P`
+- `@brunop-lima`
+- `@emilyestvz`
+- `@fern-menezes`
+- `@Josadack`
+- `@VictorPestana`
