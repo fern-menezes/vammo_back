@@ -48,8 +48,10 @@ export class AuthService{
             usuario: usuarioLogin.usuario,
             senha: '',
             foto: buscaUsuario.foto,
-            token: `Bearer ${this.jwtService.sign(payload)}`, // Gera o token com os dados adicionais
+            tipo_user: buscaUsuario.tipo_user, // Incluído aqui
+            token: `Bearer ${this.jwtService.sign(payload)}`,
         };
+        
     }
     
 }

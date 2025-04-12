@@ -113,11 +113,11 @@ export class UsuarioService {
 
     //Método Extra para verificar a idade do usuário
     async calculoIdade(usuario: Usuario): Promise<Usuario> {
-        const dataNascimento = usuario.data_aniversario;
+        const dataNascimento = usuario.birthday;
         const [dia, mes, ano] = dataNascimento.split('/').map(Number);
-        const dataNascimentoDate = new Date(ano, mes - 1, dia);
+        const birthdayDate = new Date(ano, mes - 1, dia);
         const dataAtual = new Date();
-        const idade = differenceInYears(dataAtual, dataNascimentoDate);
+        const idade = differenceInYears(dataAtual, birthdayDate);
 
         if (idade < 18) {
             throw new HttpException(
