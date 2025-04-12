@@ -12,9 +12,10 @@ export class Usuario{
     @ApiProperty()
     id:number
  
+    
     @Column({ type: 'enum', enum: UserRole, default: UserRole.CLIENTE })
+    @ApiProperty()
     tipo_user: UserRole;
-
 
     @IsNotEmpty()
     @Column({length:255, nullable:false})
