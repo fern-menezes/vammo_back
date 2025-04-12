@@ -14,44 +14,40 @@ export class AuthService{
         private bcrypt: Bcrypt
     ){ }
 
-    async validateUser(username: string, password: string): Promise<any>{
-
-        const buscaUsuario = await this.usuarioService.findByUsuario(username)
-
-        if(!buscaUsuario)
-            throw new HttpException('⚠️ O Usuario já existe!', HttpStatus.NOT_FOUND)
-
-        const matchPassword = await this.bcrypt.compararSenhas(password, buscaUsuario.senha)
-
-        if(buscaUsuario && matchPassword){
-            const { senha, ...resposta } = buscaUsuario
-            return resposta
+    async validateUser(username: string, password: string): Promise<any> {
+        const buscaUsuario = await this.usuarioService.findByUsuario(username);
+    
+        if (!buscaUsuario) {
+            throw new HttpException('⚠️ Usuário não encontrado!', HttpStatus.NOT_FOUND);
         }
-
-        return null
+    
+        const matchPassword = await this.bcrypt.compararSenhas(password, buscaUsuario.senha);
+    
+        if (!matchPassword) {
+            throw new HttpException('⚠️ Senha incorreta!', HttpStatus.UNAUTHORIZED);
+        }
+    
+        // Retorna os dados do usuário sem a senha
+        const { senha, ...resposta } = buscaUsuario;
+        return resposta;
     }
 
     // Login com email e senha
     async login(usuarioLogin: UsuarioLogin) {
-        const buscaUsuario = await this.usuarioService.findByUsuario(usuarioLogin.usuario);
+        // Valida o usuário reutilizando a função validateUser
+        const usuarioValido = await this.validateUser(usuarioLogin.usuario, usuarioLogin.senha);
     
-        if (!buscaUsuario) {
-            throw new HttpException("⚠️ O Usuário não foi encontrado!", HttpStatus.NOT_FOUND); // Corrigido o erro aqui também
-        }
-    
-        // Inclui `tipo_user` no payload
-        const payload = { sub: buscaUsuario.id, usuario: buscaUsuario.usuario, tipo_user: buscaUsuario.tipo_user };
+        // Define o payload para o JWT
+        const payload = { sub: usuarioValido.id, usuario: usuarioValido.usuario, tipo_user: usuarioValido.tipo_user };
     
         return {
-            id: buscaUsuario.id,
-            nome: buscaUsuario.nome,
-            usuario: usuarioLogin.usuario,
-            senha: '',
-            foto: buscaUsuario.foto,
-            tipo_user: buscaUsuario.tipo_user, // Incluído aqui
+            id: usuarioValido.id,
+            nome: usuarioValido.nome,
+            tipo_user: usuarioValido.tipo_user,
+            usuario: usuarioValido.usuario,
+            birthday: usuarioValido.birthday,            
             token: `Bearer ${this.jwtService.sign(payload)}`,
         };
-        
     }
     
 }
